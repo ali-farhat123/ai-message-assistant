@@ -14,12 +14,14 @@ use Illuminate\Http\Request;
             $data = $request->validate([
         'content' => 'required|string',
         ]);
+    $data['user_id'] = $request->user()->id;
         Message::create($data);
         return redirect('/messages')-> with('success', 'Message Saved');
         }
-        public function index()
+        public function index(Request $request)
     {
-        $messages = Message::all();
+         
+        $messages = Message::where('user_id', $request->user()->id)->get();
         return view('messages.index', ['messages' => $messages]);
     }
     }
