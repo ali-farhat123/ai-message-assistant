@@ -14,4 +14,6 @@
             </div>
         </div>
     </div>
+    <a href="/messages/create">New Message</a><br><br>
+<a href="/messages">All Messages</a>
 </x-app-layout>
