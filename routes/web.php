@@ -7,9 +7,12 @@ use App\Http\Controllers\MessageController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/messages/create', [MessageController::class, 'create']);
-Route::post('/messages', [MessageController::class, 'store']);
-Route::get('/messages', [MessageController::class, 'index']);
+Route::middleware('auth')->group(function(){
+    Route::get('/messages/create', [MessageController::class, 'create']);
+    Route::post('/messages', [MessageController::class, 'store']);
+    Route::get('/messages', [MessageController::class, 'index']);
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
